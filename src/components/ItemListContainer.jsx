@@ -1,13 +1,37 @@
 import Container from 'react-bootstrap/Container';
+import { useState, useEffect } from 'react';
+import { ItemList } from './ItemList';
+import { useParams } from 'react-router-dom';
+import { getFirestore, getDocs, collection, query, where } from 'firebase/firestore';
 
-import PropTypes from 'prop-types';
+export const ItemListContainer = () => {
+    const [products, setProducts] = useState([]);
+    const { id } = useParams();
 
-export const ItemListContainer = ({ greeting }) => (
-    <Container className='mt-4'>
-        <h1>{greeting}</h1>
-    </Container>
-);
+    useEffect(() => {
+        const db = getFirestore();
+        let refCollection;
+        if (!id) {
+            refCollection = collection(db, "items");
+        } else {
+            refCollection = query(
+                collection(db, "items"),
+                where("category", "==", id)
+            );
+        }
 
-ItemListContainer.propTypes = {
-    greeting: PropTypes.string.isRequired,
+        getDocs(refCollection).then((snapshot) => {
+            setProducts(
+                snapshot.docs.map((doc) => {
+                    return { id: doc.id, ...doc.data() };
+                })
+            );
+        })
+    }, [id]);
+
+    return (
+        <Container className='mt-4'>
+            <ItemList products={products} />
+        </Container>
+    );
 };
