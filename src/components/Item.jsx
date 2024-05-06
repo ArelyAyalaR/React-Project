@@ -4,14 +4,19 @@ import { Link } from 'react-router-dom';
 
 export const Item = ({product}) => {
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" height="250" src={product.img}/>
-      <Card.Body>
+    <Card className="card-custom" style={{ width: '18rem' }}>
+    <Card.Img variant="top" src={product.img} />
+    <Card.Body>
         <Card.Title>{product.name}</Card.Title>
         <Card.Text>{product.detail}</Card.Text>
         <Card.Text>{product.category}</Card.Text>
-        <Link to={`/item/${product.id}`}><Button variant="primary">Detalles</Button></Link>
-      </Card.Body>
-    </Card>
+    </Card.Body>
+    <Card.Footer>
+        <Link to={`/item/${product.id}`}>
+            <Button variant="primary">Detalles</Button>
+        </Link>
+    </Card.Footer>
+</Card>
+
   )
 };

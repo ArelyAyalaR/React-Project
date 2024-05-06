@@ -6,3 +6,35 @@
 .nav-link{
   color: white;
 }
+
+body{
+  background-color: rgb(239, 239, 239);
+}
+
+/* Cards */
+.card-body {
+  font-family: 'Arial', sans-serif; /* Ejemplo de fuente */
+  color: #333; /* Color de texto oscuro para mejor legibilidad */
+  font-weight: bold;
+}
+
+.card-title {
+  color: #0056b3; /* Un color distintivo para los títulos */
+}
+
+
+.card-custom {
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-custom:hover {
+  transform: scale(1.05);
+}
+
+.card-img-top {
+  height: 200px; /* Ajusta esto según tus necesidades */
+  object-fit: cover;
+}
+

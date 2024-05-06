@@ -12,7 +12,7 @@ const initialValues = {
 
 export const Cart = () => {
     const [values, setValues] = useState(initialValues);
-    const { items } = useContext(CartContext);
+    const { clear, items, removeItem } = useContext(CartContext);
     const total = () => {
         return items.reduce((acc, item) => acc + item.quantity * item.price, 0);
     };
@@ -40,10 +40,14 @@ export const Cart = () => {
             if (id) {
                 alert("Su orden: " + id + "ha sido completada");
             }
+        }).finally(() => {
+            clear();
+            setValues(initialValues);
         });
     };
 
-
+    const handleClear = (id) => clear(id);
+    const handleRemove = (id) => removeItem(id);
 
     return (
         <Container className="mt-4">
@@ -54,11 +58,13 @@ export const Cart = () => {
                         <li>Producto: {i.name}</li>
                         <li>Cantidad: {i.quantity}</li>
                         <li>$ {i.price}</li>
+                        <li onClick={() => handleRemove(i.id)}>X</li>
                     </ul>
                 );
             })}
             <div>Total: {total()}</div>
-            <form>
+            <button onClick={handleClear}>Vaciar carrito</button>
+            {items?.length > 0 &&<form>
                 <label>Nombre</label>
                 <input type="text" value={values.name} name="name" onChange={handleChange} />
                 <label>Celular</label>
@@ -66,7 +72,7 @@ export const Cart = () => {
                 <label>Email</label>
                 <input type="email" value={values.email} name="email" onChange={handleChange} />
                 <button type='button' onClick={handleSubmit}>Enviar</button>
-            </form>
+            </form>}
         </Container>
     )
 }

@@ -8,7 +8,7 @@ export const NavBar = () => {
     return (<>
         <Navbar bg="dark" data-bs-theme="dark">
             <Container>
-                <Nav.Link to="/" as={NavLink}>La Tienda</Nav.Link>
+                <Nav.Link to="/" as={NavLink}>GameWorld</Nav.Link>
                 <Nav className="me-auto">
                     <Nav.Link to="/category/Adventure" as={NavLink}>Adventure</Nav.Link>
                     <Nav.Link to="/category/Action" as={NavLink}>Action</Nav.Link>
